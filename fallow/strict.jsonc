@@ -1,0 +1,13 @@
+// nostandard-tidy fallow strict: recommended plus rules that are off by default.
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "extends": ["./recommended.jsonc"],
+  "rules": {
+    "prop-drilling": "error",
+    "thin-wrapper": "error",
+    "private-type-leaks": "error",
+    "require-suppression-reason": "error"
+  },
+  "health": {"maxCyclomatic": 8},
+  "duplicates": {"mode": "strict"}
+}

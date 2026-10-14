@@ -1,0 +1,7 @@
+// nostandard-tidy fallow recommended: basic with tighter thresholds.
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "extends": ["./basic.jsonc"],
+  "health": {"maxCyclomatic": 10, "maxCognitive": 10, "maxUnitSize": 40},
+  "duplicates": {"minLines": 3}
+}
