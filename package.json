@@ -1,0 +1,19 @@
+{
+  "name": "nostandard-tidy",
+  "version": "0.1.0",
+  "description": "Shared base configs for fallow and dependency-cruiser that keep codebase structure tidy.",
+  "license": "MIT",
+  "author": "Daniele Dellafiore",
+  "repository": {"type": "git", "url": "git+https://github.com/ildella/nostandard-tidy.git"},
+  "keywords": ["fallow", "dependency-cruiser", "architecture", "config"],
+  "files": ["fallow/", "depcruise/"],
+  "exports": {
+    "./fallow/basic.json": "./fallow/basic.json",
+    "./depcruise/basic.cjs": "./depcruise/basic.cjs",
+    "./package.json": "./package.json"
+  },
+  "peerDependencies": {
+    "dependency-cruiser": "^18.6.0",
+    "fallow": "^3.33.0"
+  }
+}
