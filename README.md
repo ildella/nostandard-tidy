@@ -44,6 +44,35 @@ module.exports = {
 
 A rule with the same name overrides the base rule.
 
+### Helpers (ESM)
+
+Build the rules instead of extending a config. Project exceptions are options.
+
+```js
+import {hygiene} from 'nostandard-tidy/depcruise/hygiene.mjs'
+import {layers, noCircular, notTo, onlyFrom} from 'nostandard-tidy/depcruise/boundaries.mjs'
+import {baseOptions, svelteResolve} from 'nostandard-tidy/depcruise/options.mjs'
+
+const lib = {name: 'lib', path: '^src/lib/'}
+const service = {name: 'service', path: '^src/service/'}
+
+export default {
+  forbidden: [
+    ...hygiene({orphansPathNot: ['^tests/'], unresolvablePathNot: [], devDepPathNot: []}),
+    noCircular(),
+    ...layers([lib, service]), // lower never imports higher
+    notTo(service, lib, {pathNot: '^src/lib/i18n'}), // skip a layer
+    onlyFrom('tauri-only-from-platform', {scope: '^src/', gateway: '^src/platform/', to: {path: '@tauri-apps'}}),
+  ],
+  options: {...baseOptions, enhancedResolveOptions: svelteResolve},
+}
+```
+
+- `hygiene(options)`: the recommended-strict rules, all at error except `optional-deps-used` (info). Options: `srcPath`, `testsPath`, `orphansPathNot`, `unresolvablePathNot`, `devDepPathNot`.
+- `layers(list)`: ordered layers, lowest first.
+- `notTo(from, to, {pathNot})`, `onlyFrom(name, {scope, gateway, to})`, `noCircular()`.
+- `baseOptions`: cruise and reporter options; `svelteResolve`: resolution for Svelte projects.
+
 ## License
 
 MIT
