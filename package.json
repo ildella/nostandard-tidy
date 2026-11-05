@@ -16,7 +16,8 @@
   ],
   "files": [
     "fallow/",
-    "depcruise/"
+    "depcruise/",
+    "skills/"
   ],
   "exports": {
     "./fallow/basic.jsonc": "./fallow/basic.jsonc",

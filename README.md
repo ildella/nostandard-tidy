@@ -73,6 +73,10 @@ export default {
 - `notTo(from, to, {pathNot})`, `onlyFrom(name, {scope, gateway, to})`, `noCircular()`.
 - `baseOptions`: cruise and reporter options; `svelteResolve`: resolution for Svelte projects.
 
+## Agent skill
+
+`skills/quality-gates/SKILL.md` is a short operational manual for an agent working in a repo that uses this gate. Copy it into the project's skills directory, for example `.agents/skills/quality-gates/`.
+
 ## License
 
 MIT
