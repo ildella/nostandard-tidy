@@ -69,6 +69,18 @@ Never edit a baseline by hand, run `--save-baseline` to silence a finding, or se
 
 The project extends a `nostandard-tidy` level: `basic`, `recommended` or `strict`. Do not edit the upstream configs in the project; extend them and set project options locally.
 
+## Dependency-cruiser
+
+Dependency-cruiser owns import cycles and layer boundaries. Fallow keeps them `off` for that reason: do not re-enable them there, and do not duplicate a boundary rule in both tools.
+
+- `yarn depcruise.basic` is the structural gate. It runs in the project check and in CI, separately from the fallow gate; keep both green.
+- `yarn depcruise.next1` and `next2` are ratchets toward stricter layers, not gates. They fail by design while the codebase catches up: never wire them into the check or CI.
+- The exit code is the number of violations: `0` is clean, a number such as `42` means 42 violations, not a broken command.
+
+A violation reads `<rule>: <from> -> <to>`. Fix it by routing the import through the gateway layer the rule declares, or by inverting the dependency. A cycle is broken by extracting the shared piece downward, not by adding an exception.
+
+Do not silence a violation with a new exception. Exceptions are project options with a reason, in the project's depcruise config, and they get reviewed. Upstream helpers come from `nostandard-tidy/depcruise/*`; do not edit those in the project.
+
 ## Coupling and trace
 
 A coupling penalty is file fan-in, not a function. Do not add a dependency-cruiser instability rule for it: instability flags leaves, not hubs. File fan-in is a hint, not a threshold.

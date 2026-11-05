@@ -75,7 +75,15 @@ export default {
 
 ## Agent skill
 
-`skills/quality-gates/SKILL.md` is a short operational manual for an agent working in a repo that uses this gate. Copy it into the project's skills directory, for example `.agents/skills/quality-gates/`.
+`skills/quality-gates` is the operational manual for an agent working in a repo that uses this fallow / dependency-cruiser gate. Install it into the project's skills directory:
+
+```sh
+npx skills add https://github.com/ildella/nostandard-tidy/tree/master/skills
+```
+
+Installs `quality-gates`. With [skills-npm](https://github.com/antfu/skills-npm/): `yarn add -D skills-npm && yarn skills-npm`.
+
+The skill assumes the project already has a gate config and the usual wrapper scripts (`yarn fallow.basic`, `yarn fallow.<category>`, `yarn depcruise.basic`). It never invents a gate.
 
 ## License
 
