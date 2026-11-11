@@ -1,0 +1,9 @@
+{
+  "issues": {
+    "provider": "local",
+    "local": {
+      "prefix": "TIDY",
+      "project": "nostandard-tidy"
+    }
+  }
+}
