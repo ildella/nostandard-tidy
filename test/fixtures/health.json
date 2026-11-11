@@ -1,0 +1,32 @@
+{
+  "kind": "health",
+  "schema_version": 13,
+  "version": "3.42.0",
+  "findings": [],
+  "summary": {
+    "files_analyzed": 725,
+    "functions_analyzed": 6192,
+    "functions_above_threshold": 4,
+    "max_cyclomatic_threshold": 20,
+    "max_cognitive_threshold": 15,
+    "average_maintainability": 90.2
+  },
+  "health_score": {
+    "formula_version": 3,
+    "score": 98.1,
+    "grade": "A",
+    "penalties": {
+      "dead_files": 0.0,
+      "dead_exports": 0.0,
+      "complexity": 0.0,
+      "p90_complexity": 0.0,
+      "maintainability": 0.3,
+      "hotspots": 0.0,
+      "unused_deps": 0.0,
+      "circular_deps": 0.0,
+      "unit_size": 0.0,
+      "coupling": 1.6,
+      "duplication": 0.0
+    }
+  }
+}

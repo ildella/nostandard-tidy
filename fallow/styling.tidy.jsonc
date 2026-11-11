@@ -1,0 +1,11 @@
+// nostandard-tidy fallow styling: CSS and CSS-in-JS drift at error.
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "rules": {
+    "css-token-drift": "error",
+    "css-duplicate-block": "error",
+    "css-selector-complexity": "error",
+    "css-dead-surface": "error",
+    "css-broken-reference": "error"
+  }
+}

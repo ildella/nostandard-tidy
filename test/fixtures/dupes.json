@@ -1,0 +1,23 @@
+{
+  "kind": "dupes",
+  "schema_version": 10,
+  "version": "3.42.0",
+  "stats": {
+    "total_files": 474,
+    "files_with_clones": 0,
+    "total_lines": 30329,
+    "duplicated_lines": 0,
+    "clone_groups": 0,
+    "clone_families": 0,
+    "clone_instances": 0,
+    "duplication_percentage": 0.0
+  },
+  "gate_outcomes": {
+    "duplication-threshold": {
+      "status": "pass",
+      "enforced": true,
+      "observed": 0.0,
+      "threshold": 5.0
+    }
+  }
+}

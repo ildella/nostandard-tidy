@@ -1,0 +1,40 @@
+{
+  "kind": "health",
+  "schema_version": 13,
+  "version": "3.42.0",
+  "findings": [],
+  "styling_health": {
+    "formula_version": 3,
+    "score": 70.0,
+    "grade": "B",
+    "penalties": {
+      "duplication": 20.0,
+      "dead_surface": 0.0,
+      "broken_references": 0.0,
+      "token_erosion": 0.0,
+      "structural": 10.0
+    },
+    "confidence": "low",
+    "confidence_reason": "graded from only 10 declarations across 1 stylesheet"
+  },
+  "styling_findings": [
+    {
+      "code": "css-duplicate-block",
+      "sub_kind": "duplicate-declaration-block",
+      "path": "style.css",
+      "line": 1,
+      "value": "4-declaration block repeated 2 times",
+      "effective_severity": "warn",
+      "confidence": "high"
+    },
+    {
+      "code": "css-selector-complexity",
+      "sub_kind": "important-density",
+      "path": "style.css",
+      "line": 3,
+      "value": "2 !important declarations across 2 declarations",
+      "effective_severity": "warn",
+      "confidence": "high"
+    }
+  ]
+}

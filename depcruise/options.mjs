@@ -24,3 +24,11 @@ export const svelteResolve = {
   extensions: ['.js', '.svelte'],
   mainFields: ['module', 'main'],
 }
+
+// Node resolution preset: packages that expose `exports` without `main` do not resolve with the defaults.
+export const nodeResolve = {
+  exportsFields: ['exports'],
+  conditionNames: ['import', 'require', 'node', 'default'],
+  mainFields: ['module', 'main'],
+  extensions: ['.js', '.json', '.node'],
+}
