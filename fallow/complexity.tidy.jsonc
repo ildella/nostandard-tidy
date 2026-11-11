@@ -1,0 +1,9 @@
+// nostandard-tidy fallow complexity: cyclomatic and cognitive complexity at error.
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "rules": {
+    "complexity-cyclomatic": "error",
+    "complexity-cognitive": "error"
+  },
+  "health": {"maxCyclomatic": 8, "maxCognitive": 8}
+}

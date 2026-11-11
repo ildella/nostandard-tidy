@@ -1,0 +1,11 @@
+// nostandard-tidy fallow architecture: cycles and policy at error; layers live in depcruise.
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "rules": {
+    "circular-dependencies": "error",
+    "re-export-cycle": "error",
+    "package-cycle": "error",
+    "policy-violation": "error",
+    "boundary-violation": "off"
+  }
+}

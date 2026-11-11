@@ -1,0 +1,46 @@
+{
+  "kind": "dead-code",
+  "profile": "lean",
+  "schema_version": 10,
+  "version": "3.42.0",
+  "total_issues": 1,
+  "summary": {
+    "total_issues": 1,
+    "unused_exports": 1
+  },
+  "baseline": {
+    "entries": 0,
+    "matched": 0
+  },
+  "baseline_staleness": {
+    "baseline_entries": 0,
+    "matched_entries": 0,
+    "stale_entries": 0,
+    "current_findings": 0,
+    "change_scoped": false,
+    "stale": false,
+    "warning": "none",
+    "gate_trips": false,
+    "moved_entries": 0
+  },
+  "gate_outcomes": {
+    "error-severity-findings": {
+      "status": "fail",
+      "enforced": true,
+      "observed": 1.0,
+      "threshold_label": "error"
+    }
+  },
+  "unused_exports": [
+    {
+      "path": "lib/a.js",
+      "export_name": "unusedThing",
+      "is_type_only": false,
+      "line": 1,
+      "col": 13,
+      "is_re_export": false,
+      "finding_id": "dc1:unused-export:5cfacebfbffdcd2e",
+      "effective_severity": "error"
+    }
+  ]
+}

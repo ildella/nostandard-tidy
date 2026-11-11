@@ -17,12 +17,24 @@
   "files": [
     "fallow/",
     "depcruise/",
+    "bin/",
+    "lib/",
     "skills/"
   ],
+  "bin": {
+    "tidy": "./bin/tidy.js"
+  },
   "exports": {
     "./fallow/basic.jsonc": "./fallow/basic.jsonc",
     "./fallow/recommended.jsonc": "./fallow/recommended.jsonc",
     "./fallow/strict.jsonc": "./fallow/strict.jsonc",
+    "./fallow/dead-code.tidy.jsonc": "./fallow/dead-code.tidy.jsonc",
+    "./fallow/complexity.tidy.jsonc": "./fallow/complexity.tidy.jsonc",
+    "./fallow/health.tidy.jsonc": "./fallow/health.tidy.jsonc",
+    "./fallow/duplication.tidy.jsonc": "./fallow/duplication.tidy.jsonc",
+    "./fallow/architecture.tidy.jsonc": "./fallow/architecture.tidy.jsonc",
+    "./fallow/styling.tidy.jsonc": "./fallow/styling.tidy.jsonc",
+    "./fallow/all.tidy.jsonc": "./fallow/all.tidy.jsonc",
     "./depcruise/basic.cjs": "./depcruise/basic.cjs",
     "./depcruise/hygiene.mjs": "./depcruise/hygiene.mjs",
     "./depcruise/boundaries.mjs": "./depcruise/boundaries.mjs",
@@ -31,10 +43,11 @@
   },
   "peerDependencies": {
     "dependency-cruiser": "^18.6.0",
-    "fallow": "^3.33.0"
+    "fallow": "^3.39.0"
   },
   "scripts": {
-    "check": "node script/check.js",
+    "test": "node --test test/*.test.js",
+    "check": "node script/check.js && node --test test/*.test.js",
     "audit.prod": "npm audit --omit=dev --audit-level=moderate"
   },
   "engines": {

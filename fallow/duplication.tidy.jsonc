@@ -1,0 +1,5 @@
+// nostandard-tidy fallow duplication: fail above the threshold.
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "duplicates": {"threshold": 5, "minLines": 4}
+}

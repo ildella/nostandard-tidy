@@ -9,7 +9,7 @@ description: Operational manual for a fallow structural quality gate built on no
 
 Apply only when a gate config exists, usually `quality/fallow/gate*.jsonc`. Never invent a gate, a baseline or a config.
 
-The examples assume the wrapper scripts a project normally adds: `yarn fallow.basic`, `yarn fallow.<category>`, `yarn fallow.<category>.raw`, `yarn fallow.debt`. If a project has no wrappers, run the same fallow subcommand with its gate or category config. The score wrapper is usually named `fallow.score` and runs `fallow health`.
+The examples assume the wrapper scripts a project normally adds: `yarn fallow.basic`, `yarn fallow.<category>`, `yarn fallow.<category>.raw`, `yarn fallow.debt`, `yarn fallow.debt.prune`. The wrappers call `tidy` from `nostandard-tidy`, so the script names are the same in every project. If a project has no wrappers, run the same fallow subcommand with its gate or category config. The score wrapper is usually named `fallow.score` and runs `fallow health`.
 
 ## What a gate line means
 
@@ -32,6 +32,19 @@ A warning is debt, not a gate failure. Promote a rule to `error` only when it re
 Categories: `dead-code`, `complexity`, `score`, `duplication`, `architecture`, `styling`.
 
 Do not call `fallow complexity`; there is no such subcommand.
+
+## The tidy CLI
+
+`tidy gate` runs the five analyses once and prints one verdict.
+
+- `tidy gate`: the only command that applies the baseline and the score floor.
+- `tidy category <name>`: one category, with the project config as it is; the project target decides severity.
+- `tidy raw <name>`: the same config with its rule severities untouched, for a report.
+- `tidy debt`: the accepted findings. `tidy prune`: drops stale entries only.
+
+Configs are discovered at `quality/fallow/<layer>.jsonc`, or the unique `quality/fallow/<layer>.<project>.jsonc`; `--config-dir` overrides the directory.
+
+Exit codes: `0` clean; `1` findings, a threshold breach, a score below the floor or a stale entry; `2` a tool or config error. A `2` is never a verdict: fix the command, not the code.
 
 ## Workflow
 
@@ -67,21 +80,23 @@ The score is a trend, not a target. 100 is unreachable on a large codebase becau
 
 Never edit a baseline by hand, run `--save-baseline` to silence a finding, or set a rule to `off` to get a green gate. `off` is a structural exception decided in the target config. New debt is an explicit reviewed diff. Prune only removes.
 
-The project extends a `nostandard-tidy` level: `basic`, `recommended` or `strict`. Do not edit the upstream configs in the project; extend them and set project options locally.
+Upstream ships one file per category plus `all.tidy.jsonc`; a project base owns the arrays; a `target.*` file is the only place a rule is lowered to `off` or `warn`; a `<category>.*` file adds what a single command needs. The gate composes base, all and the targets, and never extends a category file.
+
+A level never removes a rule, and nothing upstream is edited in the project. `basic`, `recommended` and `strict` remain shipped for compatibility only.
 
 A library folder is the one place where an unused export is not debt: it ships API it does not consume. Keep that exception scoped to the folder, in a config that lives inside it and is inherited by the project config. Never turn the rule off globally.
 
 ## Dependency-cruiser
 
-Dependency-cruiser owns import cycles and layer boundaries. Fallow keeps them `off` for that reason: do not re-enable them there, and do not duplicate a boundary rule in both tools.
+Dependency-cruiser owns import cycles and layer boundaries. Fallow keeps them `off` for that reason: do not re-enable them there, and do not duplicate a boundary rule in both tools. Upstream `architecture.tidy` sets `circular-dependencies` to `error`, so the project target turns it off; that is the one place the rule is lowered.
 
 - `yarn depcruise.basic` is the structural gate. It runs in the project check and in CI, separately from the fallow gate; keep both green.
 - `yarn depcruise.debt` (or if one wants, debt1, debt2...) are ratchets toward stricter layers, not gates. They fail by design while the codebase catches up: never wire them into the check or CI.
-- The exit code is the number of violations: `0` is clean, a number such as `42` means 42 violations, not a broken command.
+- The exit code is normally the number of violations: `0` is clean, a number such as `42` means 42 violations, not a broken command. The JSON reporter can exit `0` while reporting errors, so read `summary.error` when a script needs the verdict.
 
 A violation reads `<rule>: <from> -> <to>`. Fix it by routing the import through the gateway layer the rule declares, or by inverting the dependency. A cycle is broken by extracting the shared piece downward, not by adding an exception.
 
-Do not silence a violation with a new exception. Exceptions are project options with a reason, in the project's depcruise config, and they get reviewed. Upstream helpers come from `nostandard-tidy/depcruise/*`; do not edit those in the project.
+Do not silence a violation with a new exception. Exceptions are project options with a reason, in the project's depcruise config, and they get reviewed. Upstream helpers come from `nostandard-tidy/depcruise/*`; do not edit those in the project. `nodeResolve` is for Node packages, including the ones that expose `exports` without `main`; use `hygiene({srcPath, testsPath})` with the project's real test root.
 
 ## Coupling and trace
 

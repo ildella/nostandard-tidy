@@ -1,0 +1,13 @@
+// nostandard-tidy fallow all: every category at its strict default.
+// No arrays here: fallow replaces arrays on extends, so entry/ignore stay per project.
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "extends": [
+    "./dead-code.tidy.jsonc",
+    "./complexity.tidy.jsonc",
+    "./health.tidy.jsonc",
+    "./duplication.tidy.jsonc",
+    "./architecture.tidy.jsonc",
+    "./styling.tidy.jsonc"
+  ]
+}

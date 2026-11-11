@@ -1,0 +1,35 @@
+{
+  "kind": "dead-code",
+  "profile": "lean",
+  "schema_version": 10,
+  "version": "3.42.0",
+  "total_issues": 0,
+  "summary": {},
+  "baseline": {
+    "entries": 3,
+    "matched": 2
+  },
+  "baseline_staleness": {
+    "baseline_entries": 3,
+    "matched_entries": 2,
+    "stale_entries": 1,
+    "current_findings": 0,
+    "change_scoped": false,
+    "stale": true,
+    "warning": "stale-entries",
+    "gate_trips": true,
+    "moved_entries": 0
+  },
+  "gate_outcomes": {
+    "error-severity-findings": {
+      "status": "pass",
+      "enforced": true,
+      "observed": 0.0,
+      "threshold_label": "error"
+    },
+    "stale-baseline": {
+      "status": "fail",
+      "enforced": true
+    }
+  }
+}

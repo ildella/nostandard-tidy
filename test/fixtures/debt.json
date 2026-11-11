@@ -1,0 +1,11 @@
+{
+  "kind": "dead-code",
+  "identity": "dc1",
+  "unused_files": [
+    "unused-file:extensions/nostr-diagnostics/relay-diagnostics.js",
+    "unused-file:extensions/remote-control/browser-session.js"
+  ],
+  "unused_exports": [
+    "unused-export:src/app/service.js:helper"
+  ]
+}
