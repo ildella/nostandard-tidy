@@ -55,7 +55,7 @@ The npm package must be really installed in `node_modules` (not `npm link` or `f
 The `tidy` CLI runs the gate so a project does not need wrapper scripts.
 
 - `tidy gate`: the whole gate. It is the only command that applies the identity baseline.
-- `tidy category <name>`: one category, at its strict severity.
+- `tidy category <name>`: one category, with the project config as it is; the project target decides severity.
 - `tidy raw <name>`: the same config with its rule severities untouched, for a report.
 - `tidy debt`: prints the current baseline entries.
 - `tidy prune`: drops the stale baseline entries and nothing else.

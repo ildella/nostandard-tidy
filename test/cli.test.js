@@ -68,3 +68,36 @@ test('gate exits 2 without a verdict when fallow fails', (t) => {
   assert.equal(result.stdout, '')
   assert.ok(result.stderr.includes('boom'))
 })
+
+test('gate exits 2 when a required payload key is missing', (t) => {
+  const root = project(t, '#!/bin/sh\necho "{}"\n')
+  const result = run(root, ['gate'])
+
+  assert.equal(result.status, 2)
+  assert.equal(result.stdout, '')
+  assert.ok(result.stderr.includes('missing gate_outcomes'))
+})
+
+test('category complexity accepts a lean payload with no findings key', (t) => {
+  const root = project(t, runner('dead-code.json'))
+  fs.writeFileSync(path.join(root, 'quality', 'fallow', 'complexity.jsonc'), '{}')
+  const result = run(root, ['category', 'complexity'])
+
+  assert.equal(result.status, 0, result.stderr)
+  assert.equal(result.stdout.trim(), 'complexity — 0 findings\n  thresholds        cyclomatic 20 · cognitive 15')
+})
+
+test('raw pulls --config-dir out of the forwarded arguments', (t) => {
+  const root = project(t, '#!/bin/sh\necho "$@"\n')
+  const custom = path.join(root, 'custom')
+  fs.mkdirSync(custom)
+  fs.writeFileSync(path.join(custom, 'dead-code.jsonc'), '{}')
+
+  const spaced = run(root, ['raw', 'dead-code', '--config-dir', 'custom', '--file', 'a.js'])
+  assert.equal(spaced.status, 0)
+  assert.equal(spaced.stdout.trim(), 'dead-code -c custom/dead-code.jsonc --file a.js')
+
+  const joined = run(root, ['raw', 'dead-code', '--config-dir=custom', '--', '--config-dir', 'x'])
+  assert.equal(joined.status, 0)
+  assert.equal(joined.stdout.trim(), 'dead-code -c custom/dead-code.jsonc --config-dir x')
+})

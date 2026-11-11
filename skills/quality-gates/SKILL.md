@@ -38,7 +38,7 @@ Do not call `fallow complexity`; there is no such subcommand.
 `tidy gate` runs the five analyses once and prints one verdict.
 
 - `tidy gate`: the only command that applies the baseline and the score floor.
-- `tidy category <name>`: one category, at its strict severity.
+- `tidy category <name>`: one category, with the project config as it is; the project target decides severity.
 - `tidy raw <name>`: the same config with its rule severities untouched, for a report.
 - `tidy debt`: the accepted findings. `tidy prune`: drops stale entries only.
 
@@ -88,11 +88,11 @@ A library folder is the one place where an unused export is not debt: it ships A
 
 ## Dependency-cruiser
 
-Dependency-cruiser owns import cycles and layer boundaries. Fallow keeps them `off` for that reason: do not re-enable them there, and do not duplicate a boundary rule in both tools.
+Dependency-cruiser owns import cycles and layer boundaries. Fallow keeps them `off` for that reason: do not re-enable them there, and do not duplicate a boundary rule in both tools. Upstream `architecture.tidy` sets `circular-dependencies` to `error`, so the project target turns it off; that is the one place the rule is lowered.
 
 - `yarn depcruise.basic` is the structural gate. It runs in the project check and in CI, separately from the fallow gate; keep both green.
 - `yarn depcruise.debt` (or if one wants, debt1, debt2...) are ratchets toward stricter layers, not gates. They fail by design while the codebase catches up: never wire them into the check or CI.
-- The exit code is the number of violations: `0` is clean, a number such as `42` means 42 violations, not a broken command.
+- The exit code is normally the number of violations: `0` is clean, a number such as `42` means 42 violations, not a broken command. The JSON reporter can exit `0` while reporting errors, so read `summary.error` when a script needs the verdict.
 
 A violation reads `<rule>: <from> -> <to>`. Fix it by routing the import through the gateway layer the rule declares, or by inverting the dependency. A cycle is broken by extracting the shared piece downward, not by adding an exception.
 

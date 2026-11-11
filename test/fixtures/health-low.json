@@ -28,5 +28,13 @@
       "coupling": 1.6,
       "duplication": 0.0
     }
+  },
+  "gate_outcomes": {
+    "health-findings": {
+      "status": "pass",
+      "enforced": true,
+      "observed": 0,
+      "threshold_label": "error"
+    }
   }
 }

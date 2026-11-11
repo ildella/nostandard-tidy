@@ -66,5 +66,13 @@
   "boundary_coverage_violations": [],
   "boundary_call_violations": [],
   "policy_violations": [],
-  "stale_suppressions": []
+  "stale_suppressions": [],
+  "gate_outcomes": {
+    "error-severity-findings": {
+      "status": "pass",
+      "enforced": true,
+      "observed": 0,
+      "threshold_label": "error"
+    }
+  }
 }

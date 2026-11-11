@@ -2,7 +2,6 @@
   "kind": "health",
   "schema_version": 13,
   "version": "3.42.0",
-  "findings": [],
   "summary": {
     "files_analyzed": 725,
     "functions_analyzed": 6192,
@@ -27,6 +26,14 @@
       "unit_size": 0.0,
       "coupling": 1.6,
       "duplication": 0.0
+    }
+  },
+  "gate_outcomes": {
+    "health-findings": {
+      "status": "pass",
+      "enforced": true,
+      "observed": 0,
+      "threshold_label": "error"
     }
   }
 }

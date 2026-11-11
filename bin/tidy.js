@@ -5,7 +5,7 @@ const commands = require('../lib/commands')
 const USAGE = `usage:
   tidy gate   [--config-dir DIR] [--debt FILE] [--min-score N]
   tidy category <dead-code|complexity|score|duplication|architecture|styling> [--config-dir DIR]
-  tidy raw <dead-code|complexity|score|duplication|architecture|styling> [...args]
+  tidy raw <dead-code|complexity|score|duplication|architecture|styling> [--config-dir DIR] [--] [...args]
   tidy debt   [--debt FILE]
   tidy prune  [--config-dir DIR] [--debt FILE]`
 
@@ -64,6 +64,31 @@ const parseScore = (value) => {
   return score
 }
 
+const splitRawArgs = (args) => {
+  const forwarded = []
+  let configDir
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index]
+    if (arg === '--') {
+      forwarded.push(...args.slice(index + 1))
+      break
+    }
+    if (arg === '--config-dir') {
+      const value = args[index + 1]
+      if (value === undefined) throw new UsageError('missing value for --config-dir')
+      configDir = value
+      index += 1
+    } else if (arg.startsWith('--config-dir=')) {
+      configDir = arg.slice('--config-dir='.length)
+    } else {
+      forwarded.push(arg)
+    }
+  }
+
+  return {configDir, args: forwarded}
+}
+
 const parse = (argv) => {
   const [command, ...rest] = argv
   if (command === undefined) throw new UsageError('missing command')
@@ -78,7 +103,8 @@ const parse = (argv) => {
   if (command === 'raw') {
     const [name, ...tail] = rest
     if (!CATEGORIES.includes(name)) throw new UsageError(`unknown category: ${name ?? '(missing)'}`)
-    return {command, category: name, rest: tail}
+    const {configDir, args} = splitRawArgs(tail)
+    return {command, category: name, rest: args, options: {'config-dir': configDir}}
   }
 
   if (!(command in FLAGS)) throw new UsageError(`unknown command: ${command}`)

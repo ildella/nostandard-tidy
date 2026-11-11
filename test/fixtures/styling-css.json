@@ -36,5 +36,13 @@
       "effective_severity": "warn",
       "confidence": "high"
     }
-  ]
+  ],
+  "gate_outcomes": {
+    "health-findings": {
+      "status": "pass",
+      "enforced": true,
+      "observed": 0,
+      "threshold_label": "error"
+    }
+  }
 }
