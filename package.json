@@ -1,6 +1,6 @@
 {
   "name": "nostandard-tidy",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Shared base configs for fallow and dependency-cruiser that keep codebase structure tidy.",
   "license": "MIT",
   "author": "Daniele Dellafiore",
