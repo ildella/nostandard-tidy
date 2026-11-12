@@ -1,6 +1,8 @@
 // nostandard-tidy fallow styling: CSS and CSS-in-JS drift at error.
 {
   "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  // Cache per checkout in .cache/, so .fallow/ stays free for project files.
+  "cache": {"dir": ".cache/fallow"},
   "rules": {
     "css-token-drift": "error",
     "css-duplicate-block": "error",
