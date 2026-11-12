@@ -13,8 +13,15 @@ const fallowConfigs = [
   'fallow/styling.tidy.jsonc',
   'fallow/all.tidy.jsonc',
 ]
+const EXPECTED_CACHE_DIR = '.cache/fallow'
 for (const config of fallowConfigs) {
-  execFileSync(bin('fallow'), ['config', '-c', config], {stdio: 'ignore'})
+  const resolved = JSON.parse(execFileSync(bin('fallow'), ['config', '-c', config], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'ignore'],
+  }))
+  if (resolved.cache?.dir !== EXPECTED_CACHE_DIR) {
+    throw new Error(`${config}: cache.dir is ${resolved.cache?.dir}, expected ${EXPECTED_CACHE_DIR}`)
+  }
   console.log(`${config} ok`)
 }
 const depcruise = require('./../depcruise/basic.cjs')

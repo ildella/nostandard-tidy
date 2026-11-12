@@ -44,6 +44,8 @@ Do not call `fallow complexity`; there is no such subcommand.
 
 Configs are discovered at `quality/fallow/<layer>.jsonc`, or the unique `quality/fallow/<layer>.<project>.jsonc`; `--config-dir` overrides the directory.
 
+Fallow's cache lives in `.cache/fallow` (the upstream `cache.dir`), not `.fallow/`. Keep `.cache/` out of git and leave `.fallow/` for project files; a tree that is dirty right after a gate means the cache is neither ignored nor per checkout. A project overrides the location with its own `cache` key, which merges field by field.
+
 Exit codes: `0` clean; `1` findings, a threshold breach, a score below the floor or a stale entry; `2` a tool or config error. A `2` is never a verdict: fix the command, not the code.
 
 ## Workflow

@@ -1,5 +1,7 @@
 // nostandard-tidy fallow duplication: fail above the threshold.
 {
   "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  // Cache per checkout in .cache/, so .fallow/ stays free for project files.
+  "cache": {"dir": ".cache/fallow"},
   "duplicates": {"threshold": 5, "minLines": 4}
 }

@@ -50,6 +50,14 @@ Arrays replace the parent's in fallow, so the base sets no arrays (`entry`, `ign
 
 The npm package must be really installed in `node_modules` (not `npm link` or `file:`) for depcruise to resolve it.
 
+### Cache
+
+fallow's cache goes to `.cache/fallow`, not `.fallow/`. fallow rewrites the cache directory's `.gitignore` to `*` on every run, so a project that versions anything under `.fallow/` (plugins, notes) would get a dirty tree. `.fallow/` stays free for project files.
+
+- Add `.cache/` to the project `.gitignore`. fallow also writes `.cache/fallow/.gitignore`, which keeps the tree clean on its own; the project line is the convention and covers other tools.
+- The path is relative to the directory fallow runs in (the package root when the gate runs from there), so each worktree gets its own cache. Never point it under `node_modules`: a worktree often symlinks that to the main checkout, and the branches would share one cache.
+- A project that wants another location sets its own `cache` key. `cache` is an object, so it deep-merges: `{"cache": {"maxSizeMb": 64}}` keeps the inherited `dir`.
+
 ### Gate runtime
 
 The `tidy` CLI runs the gate so a project does not need wrapper scripts.

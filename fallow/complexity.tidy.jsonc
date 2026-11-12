@@ -1,6 +1,8 @@
 // nostandard-tidy fallow complexity: cyclomatic and cognitive complexity at error.
 {
   "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  // Cache per checkout in .cache/, so .fallow/ stays free for project files.
+  "cache": {"dir": ".cache/fallow"},
   "rules": {
     "complexity-cyclomatic": "error",
     "complexity-cognitive": "error"
