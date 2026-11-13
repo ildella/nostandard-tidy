@@ -36,6 +36,16 @@ Two structural `off`s are policy, not local taste: `boundary-violation` stays of
 npm install --save-dev nostandard-tidy fallow dependency-cruiser
 ```
 
+### Agent skills
+
+Install the **Agent** skill for an AI assistant (Claude, Gemini CLI, Cursor, …):
+
+```sh
+npx skills add https://github.com/ildella/nostandard-tidy/tree/master/skills
+```
+
+This installs `nostandard-tidy`, `fallow`, `dependency-cruiser` and their **Agent** subfolders into `skills/`.
+
 ## fallow
 
 ```json
